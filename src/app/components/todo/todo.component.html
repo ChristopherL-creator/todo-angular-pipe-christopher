@@ -1,0 +1,6 @@
+<div  [style.borderColor]="todo.priority | priorityColor" *ngIf="todo" class="container">
+<span>{{todo.name | uppercase}}</span>
+<span>{{todo.tags}}</span>
+<span>{{todo.creationDate | epochFormatter}}</span>
+<span>{{todo.id}}</span>
+</div>
