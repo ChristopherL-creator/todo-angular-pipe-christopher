@@ -1,0 +1,24 @@
+<div *ngIf="todo">
+    <div>
+        <span>Name: </span>
+            <input type="text" [(ngModel)]="todo.name">
+    </div>
+    <div>
+        <span>Priority: </span>
+            <input type="number" [(ngModel)]="todo.priority">
+    </div>
+    <div>
+        <span>Tags: </span>
+            <input type="text" [(ngModel)]="todo.tags">
+    </div>
+    <div>
+        <span>Creation Date: </span>
+        <span>{{todo.creationDate}}</span>
+    </div>
+    <div *ngIf="todo.doneDate">
+        <span>Done Date: </span>
+        <span>{{todo.doneDate}}</span>
+    </div>
+    <button [disabled] = '!todo.name' (click)="saveTodo()">Save</button>
+</div>
+

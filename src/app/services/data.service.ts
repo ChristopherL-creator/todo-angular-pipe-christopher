@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Subscriber } from 'rxjs';
+import { BehaviorSubject, map, Observable, Subscriber } from 'rxjs';
 import { Todo } from '../model/todo';
 
 @Injectable({
@@ -63,5 +63,23 @@ export class DataService {
       },
       error: err => console.error(err)  
     })
+  }
+
+  postTodo(todo: Todo): Observable<Todo> {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    }
+    return this.http.post<Todo>(this.BASE_URL, todo, httpOptions)
+  }
+
+  saveTodo(todo: Todo){
+    return this.postTodo(todo).pipe(
+      map(todo => {
+        const newArray = [...this.todos.value];
+        newArray.push(todo)
+        this.todos.next(newArray);
+        return todo;
+      })
+    )
   }
 }

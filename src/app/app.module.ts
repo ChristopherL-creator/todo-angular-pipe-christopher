@@ -11,6 +11,7 @@ import { EpochFormatterPipe } from './pipes/epoch-formatter/epoch-formatter.pipe
 import { PriorityColorPipe } from './pipes/priority-color/priority-color.pipe';
 import { TagsStringPipe } from './pipes/tags-string/tags-string.pipe';
 import { PrioritySortPipe } from './pipes/priority-sort/priority-sort.pipe';
+import { TodoDetailComponent } from './components/todo-detail/todo-detail.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { PrioritySortPipe } from './pipes/priority-sort/priority-sort.pipe';
     EpochFormatterPipe,
     PriorityColorPipe,
     TagsStringPipe,
-    PrioritySortPipe
+    PrioritySortPipe,
+    TodoDetailComponent
   ],
   imports: [
     BrowserModule,
