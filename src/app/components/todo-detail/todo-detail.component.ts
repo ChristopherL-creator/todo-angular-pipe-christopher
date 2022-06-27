@@ -23,20 +23,21 @@ export class TodoDetailComponent implements OnInit {
       this.dataS.getTodoById(param).subscribe({
         next: todo => {
           this.todo = todo;
-          this.tagsString = todo? todo.tags.join(', ') : '';
         },
         error: err => console.log(err)
       })
-    } else {
+    } /*else {
       this.todo = new Todo('');
-    }
+    }*/
   }
 
   saveTodo():void{
-    this.dataS.saveTodo(this.todo).subscribe({
-      next: todo => console.log(todo),
-      error: err => console.error(err)
-    })
+    if(this.todo){
+      this.dataS.saveTodo(this.todo).subscribe({
+        next: todo => console.log(todo),
+        error: err => console.error(err)
+      })
+    }
   }
 
 }

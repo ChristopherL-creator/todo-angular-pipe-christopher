@@ -13,7 +13,7 @@
     </div>
     <div>
         <span>Creation Date: </span>
-        <span>{{todo.creationDate}}</span>
+        <span>{{todo.creationDate | epochFormatter}}</span>
     </div>
     <div *ngIf="todo.doneDate">
         <span>Done Date: </span>
