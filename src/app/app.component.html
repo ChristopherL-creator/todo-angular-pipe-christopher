@@ -1,3 +1,9 @@
-
-<app-list></app-list>
-<!-- <router-outlet></router-outlet> -->
+<header>
+  <h1>{{title}}</h1>
+  <nav>
+    <a routerLink="/todos">Todo attivi</a>
+    <a routerLink="/done">Todo completati</a>
+  </nav>
+</header>
+<!-- <app-list></app-list> -->
+<router-outlet></router-outlet>

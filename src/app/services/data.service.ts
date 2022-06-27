@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subscriber } from 'rxjs';
+import { BehaviorSubject, map, Subscriber } from 'rxjs';
 import { Todo } from '../model/todo';
 
 @Injectable({
@@ -25,5 +25,43 @@ export class DataService {
   }
 
 
+  getActiveTodos(){
+    return this.todos.pipe(
+      map(todos => todos.filter(todo => !todo.doneDate))
+    )
+  }
 
+
+  getDoneTodo(){
+    return this.todos.pipe(
+      map(todos => todos.filter(todo => todo.doneDate))
+    )
+  }
+
+  deleteTodo(todo: Todo){
+    const url = this.BASE_URL + '/' + todo.id;
+    this.http.delete(url).subscribe({
+      next: r => {
+        const newArray = this.todos.value.filter(t => t !== todo);
+        this.todos.next(newArray);
+      },
+      error: err => console.error(err)  
+    })
+  }
+
+  completeTodo(todo:Todo){
+    const url = this.BASE_URL + '/' + todo.id;
+    const completedTodo = todo;
+    completedTodo.priority = -1;
+    completedTodo.doneDate = new Date().getTime() / 1000;
+    const headers = new HttpHeaders({'Content-Type': 'application/json'})
+
+    this.http.put<Todo>(url, completedTodo, {headers}).subscribe({
+      next: todo => {
+        const newArray = [...this.todos.value]
+        this.todos.next(newArray);
+      },
+      error: err => console.error(err)  
+    })
+  }
 }

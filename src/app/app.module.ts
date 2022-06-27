@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { EpochFormatterPipe } from './pipes/epoch-formatter/epoch-formatter.pipe';
 import { PriorityColorPipe } from './pipes/priority-color/priority-color.pipe';
 import { TagsStringPipe } from './pipes/tags-string/tags-string.pipe';
+import { PrioritySortPipe } from './pipes/priority-sort/priority-sort.pipe';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { TagsStringPipe } from './pipes/tags-string/tags-string.pipe';
     TodoComponent,
     EpochFormatterPipe,
     PriorityColorPipe,
-    TagsStringPipe
+    TagsStringPipe,
+    PrioritySortPipe
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,21 @@
+header{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-left: solid 2px crimson;
+    border-bottom: solid 2px crimson;
+    border-bottom-left-radius: 8px;
+    padding: 8px;
+    margin: 8px;
+}
+
+nav{
+    display: flex;
+    gap: 16px; 
+}
+
+nav a{
+    font-size: larger;
+    text-decoration: none;
+    color: cornflowerblue;
+}

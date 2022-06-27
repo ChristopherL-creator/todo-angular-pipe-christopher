@@ -1,3 +1,8 @@
 <div>
-    <app-todo *ngFor="let todo of dataS.todos | async" [todo]="todo"></app-todo>
+    <app-todo *ngFor="let todo of getTodos() | async | prioritySort"
+     [todo]="todo"
+     (todoCompleted)="dataS.completeTodo($event)"
+     (todoDeleted)="dataS.deleteTodo($event)">
+
+    </app-todo>
 </div>
