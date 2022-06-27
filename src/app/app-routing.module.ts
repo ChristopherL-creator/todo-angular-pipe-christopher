@@ -6,6 +6,7 @@ import { TodoDetailComponent } from './components/todo-detail/todo-detail.compon
 const routes: Routes = [
   {path: 'todo', component: ListComponent, data: {isActive: true}},
   {path: 'done', component: ListComponent, data: {isActive: false}},
+  {path: 'todo/:id', component: TodoDetailComponent}, 
   {path: 'new', component: TodoDetailComponent},
   {path: '', redirectTo: '/todo', pathMatch: 'full'},
   {path: '**', redirectTo: '/todo'}

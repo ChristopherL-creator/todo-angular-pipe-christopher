@@ -1,5 +1,6 @@
 <div  [style.borderColor]="todo.priority | priorityColor" *ngIf="todo" class="container">
 <span>{{todo.name | uppercase}}</span>
+<a routerLink="/todo/{{todo.id}}">Dettagli</a>
 <span>{{todo.tags | tagsString: '#' }}</span>
 <span>{{todo.creationDate | epochFormatter}}</span>
 <span>{{todo.id}}</span>

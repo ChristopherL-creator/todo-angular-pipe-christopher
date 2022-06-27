@@ -16,10 +16,10 @@ export class DataService {
     this.getAllTodos().subscribe({
       next: todos => this.todos.next(todos),
       error: err => console.log(err)
-      
+
     })
    }
-  
+
   getAllTodos(){
     return this.http.get<Todo[]>(this.BASE_URL);
   }
@@ -45,7 +45,7 @@ export class DataService {
         const newArray = this.todos.value.filter(t => t !== todo);
         this.todos.next(newArray);
       },
-      error: err => console.error(err)  
+      error: err => console.error(err)
     })
   }
 
@@ -61,25 +61,48 @@ export class DataService {
         const newArray = [...this.todos.value]
         this.todos.next(newArray);
       },
-      error: err => console.error(err)  
+      error: err => console.error(err)
     })
+  }
+
+  putTodo(todo: Todo): Observable<Todo>{
+    const url = this.BASE_URL + '/' + todo.id;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    }
+    return this.http.put<Todo>(url, todo, httpOptions)
   }
 
   postTodo(todo: Todo): Observable<Todo> {
     const httpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json'})
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
     }
     return this.http.post<Todo>(this.BASE_URL, todo, httpOptions)
   }
 
   saveTodo(todo: Todo){
-    return this.postTodo(todo).pipe(
-      map(todo => {
-        const newArray = [...this.todos.value];
-        newArray.push(todo)
-        this.todos.next(newArray);
-        return todo;
-      })
+    if (todo.id) {
+      return this.putTodo(todo);
+    } else {
+      return this.postTodo(todo).pipe(
+        map(todo => {
+          const newArray = [...this.todos.value];
+          newArray.push(todo)
+          this.todos.next(newArray);
+          return todo;
+        })
+      )
+    }
+  }
+
+  getTodoById(id: string): Observable<Todo | undefined>{
+    return this.todos.pipe(
+      map(array => array.find(t => t.id === id))
     )
+
   }
 }
