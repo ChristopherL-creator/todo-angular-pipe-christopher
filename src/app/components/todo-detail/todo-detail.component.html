@@ -17,7 +17,7 @@
     </div>
     <div *ngIf="todo.doneDate">
         <span>Done Date: </span>
-        <span>{{todo.doneDate}}</span>
+        <span>{{todo.doneDate | epochFormatter}}</span>
     </div>
     <button [disabled]='!todo.name' (click)="saveTodo()">Save</button>
 </div>

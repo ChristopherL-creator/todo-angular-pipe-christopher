@@ -12,23 +12,25 @@ export class TodoDetailComponent implements OnInit {
 
   todo?: Todo;
 
-  tagsString = '';
-
   constructor(public dataS: DataService, private route: ActivatedRoute) { }
 
 
-  ngOnInit(): void {
+  ngOnInit(): void | Todo  {
+    // ho provato a riscrivere le propetà dell'interfaccia
+    // let obj = {} as Todo;
     const param = this.route.snapshot.paramMap.get('id');
     if (param){
+      console.log(param);
+
       this.dataS.getTodoById(param).subscribe({
         next: todo => {
           this.todo = todo;
         },
         error: err => console.log(err)
       })
-    } /*else {
-      this.todo = new Todo('');
-    }*/
+    } else {
+      // this.todo = new /*obj*/Todo('');
+    }
   }
 
   saveTodo():void{
